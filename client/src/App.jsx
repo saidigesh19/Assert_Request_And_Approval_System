@@ -1,12 +1,18 @@
 import './App.css'
-import AdminDashboard from './components/AdminDashboard'
-import LoginPage from './components/login'
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import AssetRequest from './components/assetRequest';
+import LoginPage from './components/login';
+import Register from './components/register';
 function App() {
 
 return (
-    <div>
-      <LoginPage/>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LoginPage/>} />
+        <Route path="/register" element={<Register/>} />
+        <Route path="/assetrequest" element={<AssetRequest/>} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
