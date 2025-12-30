@@ -1,10 +1,10 @@
 import './App.css'
-
+import AdminDashboard from './components/AdminDashboard'
 function App() {
 
-  return (
+return (
     <div>
-      <h1 className='text-4xl'>Asset Request & Approval System</h1>
+      <AdminDashboard/>
     </div>
   )
 }
