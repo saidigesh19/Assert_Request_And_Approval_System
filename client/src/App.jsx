@@ -1,8 +1,9 @@
 import './App.css'
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import AssetRequest from './components/assetRequest';
-import LoginPage from './components/login';
-import Register from './components/register';
+import AssetRequest from './components/Employee/assetRequest';
+import LoginPage from './components/Auth/login';
+import Register from './components/Auth/register';
+// import AdminDashboard from "./components/Admin/adminDashboard"
 function App() {
 
 return (
@@ -11,6 +12,7 @@ return (
         <Route path="/" element={<LoginPage/>} />
         <Route path="/register" element={<Register/>} />
         <Route path="/assetrequest" element={<AssetRequest/>} />
+        {/* <Route path="/admindashboard" element={<AdminDashboard/>} /> */}
       </Routes>
     </BrowserRouter>
   )

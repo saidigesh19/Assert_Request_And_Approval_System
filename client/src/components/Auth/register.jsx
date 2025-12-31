@@ -1,7 +1,33 @@
+import { useState } from "react";
 import person from "../../assets/person.svg"
 
 const Register = () => {
-    
+    const [data, setData] = useState({"name": "", "email": "", "role": "", "password": "", "confirmPassword": ""})
+    const handleChange = (e) => {
+        const{name, value} = e.target;
+        setData(prev => ({...prev, [name]:value}));
+
+    }
+    const registerPage = async(e) => {
+        e.preventDefault();
+        try{
+            const response = await axios("",{
+                method: "POST",
+                header: {'Content-Type': 'application/json'},
+                body: JSON.stringify(data)
+            })
+            if(response.ok){
+                console.alert("User Registered Succesfully");
+                setData({"name": "", "email": "", "role": "", "password": "", "confirmPassword": ""})
+            }else{
+                console.alert(`Error ${response.status}`)
+            }
+        }catch(err){
+            console.log(err, "Try again")
+        }
+    }
+
+
     return(
         <div className="w-full font-sans-serif  flex justify-center">
             <div className="container justify-center shadow-md rounded-sm bg-gray-50 h-150 item-center w-120 p-3">
@@ -13,20 +39,20 @@ const Register = () => {
                 </div>
                 <form className="flex p-5 flex-col">
                     <label className="flex font-semibold item-start my-1 text-black">Name</label>
-                    <input className="border-1 rounded-sm h-9 bg-white border-gray-300 p-2 "type="text" placeholder="Enter Your name"/>
+                    <input className="border-1 rounded-sm h-9 bg-white border-gray-300 p-2 "type="text" onChange={handleChange} value={data.name} placeholder="Enter Your name" required/>
                      <label className="flex font-semibold item-start my-1 text-black">Email</label>
-                    <input className="border-1 rounded-sm h-9 bg-white  border-gray-300 p-2" type="text" placeholder="Enter your email"/>
+                    <input className="border-1 rounded-sm h-9 bg-white  border-gray-300 p-2" type="text" onChange={handleChange} value={data.email} placeholder="Enter your email" required/>
                      <label className="flex font-semibold item-start my-1  text-black">Role</label>
-                    <select className="border-1 rounded-sm h-9  bg-white border-gray-300 p-2" type="dropdown" placeholder="Select the role">
+                    <select className="border-1 rounded-sm h-9  bg-white border-gray-300 p-2" type="dropdown" onChange={handleChange} value={data.role} placeholder="Select the role" required>
                         <option>Select the role</option>
                         <option>Employee</option>
                         <option>Admin</option>
                     </select>
                      <label className="flex font-semibold item-start my-1  text-black">Password</label>
-                    <input className="border-1 rounded-sm h-9 bg-white  border-gray-300 p-2"type="password" placeholder="Enter your password"/>
+                    <input className="border-1 rounded-sm h-9 bg-white  border-gray-300 p-2"type="password" onChange={handleChange} value={data.password} placeholder="Enter your password" required/>
                      <label className="flex font-semibold item-start my-1  text-black">Confirm Password</label>
-                     <input className="border-1 rounded-sm bg-white  border-gray-300 h-9 p-2"type="password" placeholder="Confirm your password"/>
-                    <button className="bg-sky-700 font-semibold cursor-pointer rounded-sm  mt-5 h-8 text-white" type="submit">Sign Up</button>
+                     <input className="border-1 rounded-sm bg-white  border-gray-300 h-9 p-2"type="password" onChange={handleChange} value={data.confirmPassword} placeholder="Confirm your password" required/>
+                    <button className="bg-sky-700 font-semibold cursor-pointer rounded-sm  mt-5 h-8 text-white" type="submit" onClick={registerPage}>Sign Up</button>
                 </form>
                 <div className="flex p-3 flex-row justify-start">
                     <label className="text-sky-700 ">Already have an account?</label>
