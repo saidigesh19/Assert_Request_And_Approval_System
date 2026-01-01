@@ -1,4 +1,5 @@
 require("dotenv").config();
+const cors = require('cors')
 const express = require("express");
 const dataBase = require("./src/config/MongoConnection");
 const router = require("./src/Router/authRouter");
@@ -9,10 +10,8 @@ const PORT = process.env.PORT || 5000;
 dataBase();
 
 app.use(express.json());
+app.use(cors())
 app.use("/api", router);
-
-
-
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
