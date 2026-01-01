@@ -1,5 +1,4 @@
-import React from "react";
-import lockimage from '../assets/lockimage.png'
+import lockimage from '../../assets/lockimage.png'
 
 export default function LoginPage() {
     return (
