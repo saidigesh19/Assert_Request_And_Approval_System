@@ -14,11 +14,12 @@ const signup = async (req, res) => {
         if(existingUser){
             return res.status(400).json({message: "Email already registered"})
         }
-        const hashedPassword = await bcrypt.hash(data.Password, salt)
+        const hashedPassword = await bcrypt.hash(password, salt)
         const user = await User.create({name: name, email: email, role: role, password: hashedPassword})
         res.status(201).json({success:true, message: 'User Created Succesfully'}, user)
     }catch(err){
         res.status(500).json({success:false, message: "Something went wrong"}, err)
+        console.log("error", err)
     }
 }
 /*===========LOGIN=============== */
