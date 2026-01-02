@@ -45,7 +45,7 @@ export default function LoginPage() {
                             <input type="text" name="email" placeholder="Enter your email" className="border p-2" value={email} onChange={(e)=> setEmail(e.target.value)}/>
                             <label htmlFor="password" className="self-start font-bold" >Password</label>
                             <input type="password" name="password" placeholder="Enter your password" className="border p-2" value={password} onChange={(e) => setPassword(e.target.value)}/>
-                            <button class=" w-96 p-2 bg-sky-500 hover:bg-sky-700 font-bold mt-3 text-white">Log In</button>
+                            <button className=" w-96 p-2 bg-sky-500 hover:bg-sky-700 font-bold mt-3 text-white">Log In</button>
                         </div>
                     </form>
 
