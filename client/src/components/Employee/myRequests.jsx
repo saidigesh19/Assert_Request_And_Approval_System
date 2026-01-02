@@ -46,7 +46,7 @@ const MyRequest = () => {
             <input
               type="text"
               placeholder="Search..."
-              className="w-full h-10 px-2 mt-1 text-sm border border-gray-200 rounded-md focus:ring-gray-500 bg-white"
+              className="w-full h-10 px-2 mt-1 mr-1 text-sm border border-gray-200 rounded-md focus:ring-gray-500 bg-white"
             />
             <FaSearch className="absolute m-4 text-gray-500" />
           </div>
