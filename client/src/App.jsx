@@ -13,10 +13,6 @@ return (
         <Route path="/" element={<LoginPage/>} />
         <Route path="/register" element={<Register/>} />
         <Route path="/assetrequest" element={<AssetRequest/>} />
-<<<<<<< HEAD
-        {/* <Route path="/admindashboard" element={<AdminDashboard/>} /> */}
-=======
->>>>>>> origin/main
         <Route path="/myrequest" element={<MyRequest/>} />
         <Route path="/dashboard" element={<AdminDashboard/>} />
       </Routes>
