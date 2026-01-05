@@ -2,7 +2,7 @@ import { useState } from "react";
 import person from "../../assets/person.svg"
 
 const Register = () => {
-    const [data, setData] = useState({"name": "", "email": "", "role": "", "password": "", "confirmpassword": ""})
+    const [data, setData] = useState({"name":"", "email": "", "role": "", "password": "", "confirmpassword": ""})
     const handleChange = (e) => {
         const{name, value} = e.target;
         setData(prev => ({...prev, [name]:value}));
@@ -13,14 +13,13 @@ const Register = () => {
         try{
             const response = await fetch("http://localhost:5000/api/signup",{
                 method: "POST",
-                header: {'Content-Type': 'application/json'},
-                body: JSON.stringify(data),
-                
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(data)
             })
             console.log(data)
             if(response.ok){
                 alert("User Registered Succesfully");
-                setData({"name": "", "email": "", "role": "", "password": "", "confirmPassword": ""})
+                setData({"name": "", "email": "", "role": "", "password": "", "confirmpassword": ""})
             }else{
                 alert(`Error ${response.status}`)
             }
@@ -53,7 +52,7 @@ const Register = () => {
                      <label className="flex font-semibold item-start my-1  text-black">Password</label>
                     <input className="border-1 rounded-sm h-9 bg-white  border-gray-300 p-2" name="password" type="password" onChange={handleChange} value={data.password} placeholder="Enter your password" required/>
                      <label className="flex font-semibold item-start my-1  text-black">Confirm Password</label>
-                     <input className="border-1 rounded-sm bg-white  border-gray-300 h-9 p-2" name="confirmpassword "type="password" onChange={handleChange} value={data.confirmpassword} placeholder="Confirm your password" required/>
+                     <input className="border-1 rounded-sm bg-white  border-gray-300 h-9 p-2" name="confirmpassword"type="password" onChange={handleChange} value={data.confirmpassword} placeholder="Confirm your password" required/>
                     <button className="bg-sky-700 font-semibold cursor-pointer rounded-sm  mt-5 h-8 text-white" type="submit" onClick={registerPage}>Sign Up</button>
                 </form>
                 <div className="flex p-3 flex-row justify-start">
