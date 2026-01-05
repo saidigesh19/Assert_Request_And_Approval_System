@@ -6,13 +6,12 @@ export default function LoginPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [msg, setMsg] = useState("");
-
     const handleLogin = async (e) =>{
         e.preventDefault();
 
-        const res = await fetch("http://localhost:5000/auth/login", {
+        const res = await fetch("http://localhost:5000/api/login", {
             method: "POST",
-            headers: {"Content-Type": "application/json"},
+            header: {"Content-Type": "application/json"},
             body: JSON.stringify({
                 user_name:email,
                 password
@@ -25,6 +24,7 @@ export default function LoginPage() {
             setMsg("Login Successful!");
             console.log("TOKEN ->", data.token);
             localStorage.setItem("token", data.token);
+            
         }else{
             setMsg(data.message)
         }
