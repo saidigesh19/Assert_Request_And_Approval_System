@@ -12,9 +12,9 @@ export default function LoginPage() {
     const handleLogin = async (e) =>{
         e.preventDefault();
 
-        const res = await fetch("http://localhost:5000/auth/login", {
+        const res = await fetch("http://localhost:5000/api/login", {
             method: "POST",
-            headers: {"Content-Type": "application/json"},
+            header: {"Content-Type": "application/json"},
             body: JSON.stringify({
                 email:email,
                 password
@@ -52,7 +52,7 @@ export default function LoginPage() {
                             <input type="text" name="email" placeholder="Enter your email" className="border p-2" value={email} onChange={(e)=> setEmail(e.target.value)}/>
                             <label htmlFor="password" className="self-start font-bold" >Password</label>
                             <input type="password" name="password" placeholder="Enter your password" className="border p-2" value={password} onChange={(e) => setPassword(e.target.value)}/>
-                            <button class=" w-96 p-2 bg-sky-500 hover:bg-sky-700 font-bold mt-3 text-white">Log In</button>
+                            <button className=" w-96 p-2 bg-sky-500 hover:bg-sky-700 font-bold mt-3 text-white">Log In</button>
                         </div>
                     </form>
 

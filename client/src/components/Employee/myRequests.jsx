@@ -28,9 +28,9 @@ const MyRequest = () => {
     },
   ];
   return (
-    <div className="mx-auto w-full h-screen bg-gray-50">
-      <div className="w-3xl mx-auto flex flex-col">
-        <h1 className="font-bold text-2xl text-left">Admin - Dashboard</h1>
+    <div className="mx-auto w-full h-screen">
+      <form className="w-3xl mx-auto flex flex-col mt-8">
+        <h1 className="font-bold text-2xl text-left">My Requests</h1>
       <div className="border text-left bg-white border-gray-300 rounded mt-5">
         <div className="m-2 flex flex-row justify-between gap-20 border border-gray-50 rounded text-left bg-gray-100">  
           <div className="w-full h-12 p-3 items-center border rounded-sm border-gray-200 text-sm bg-white">
@@ -46,7 +46,7 @@ const MyRequest = () => {
             <input
               type="text"
               placeholder="Search..."
-              className="w-full h-10 px-2 mt-1 text-sm border border-gray-200 rounded-md focus:ring-gray-500 bg-white"
+              className="w-full h-10 px-2 mt-1 mr-1 text-sm border border-gray-200 rounded-md focus:ring-gray-500 bg-white"
             />
             <FaSearch className="absolute m-4 text-gray-500" />
           </div>
@@ -85,12 +85,12 @@ const MyRequest = () => {
                     key={index}
                     className="bg-neutral-primary border-b border-gray-200"
                   >
-                    <th
+                    <td
                       scope="row"
-                      className="px-6 py-4 font-medium text-heading whitespace-nowrap"
+                      className="px-6 py-4 text-heading whitespace-nowrap"
                     >
                       {item.assetType}
-                    </th>
+                    </td>
                     <td className="px-6 py-4">{item.reason}</td>
                     <td className="px-6 py-4">
                       <button
@@ -107,7 +107,7 @@ const MyRequest = () => {
           </table>
         </div>
       </div>
-      </div>
+      </form>
     </div>
   );
 };
