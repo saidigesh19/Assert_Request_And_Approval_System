@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from 'axios';
+import Header from "../Header/header"
 
 const AssetRequest = () => {
   const[assert_name,setassert_name]=useState("");
@@ -41,7 +42,10 @@ const AssetRequest = () => {
     };
 
   return (
+    <div>
+      <Header/>
     <div className="min-h-screen w-full flex justify-center">
+      
       <form className="w-full max-w-xl text-left mt-8 sh" onSubmit={handleSubmit}>
         <h1 className="font-bold text-2xl text-left">Asset Request</h1>
 
@@ -96,6 +100,7 @@ const AssetRequest = () => {
           )}
         </div>
       </form>
+    </div>
     </div>
     
   );

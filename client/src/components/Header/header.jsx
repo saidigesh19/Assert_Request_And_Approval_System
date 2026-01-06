@@ -9,8 +9,8 @@ export default function Header() {
                 
                 {/* Left / center section */}
                 <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-4 text-white font-bold">
-                    <a href="">Asset</a>
-                    <a href="">Request</a>
+                    <a href="/assetrequest">Asset</a>
+                    <a href="/myrequest">Request</a>
                 </div>
 
                 {/* Right section */}
