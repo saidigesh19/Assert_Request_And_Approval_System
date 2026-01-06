@@ -1,8 +1,11 @@
 import { useState } from "react";
 import person from "../../assets/person.svg"
+import axios from "axios"
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
     const [data, setData] = useState({"name": "", "email": "", "role": "", "password": "", "confirmPassword": ""})
+    const navigate = useNavigate();
     const handleChange = (e) => {
         const{name, value} = e.target;
         setData(prev => ({...prev, [name]:value}));
@@ -11,7 +14,7 @@ const Register = () => {
     const registerPage = async(e) => {
         e.preventDefault();
         try{
-            const response = await axios("",{
+            const response = await axios("http://localhost:5000/api/Signup",{
                 method: "POST",
                 header: {'Content-Type': 'application/json'},
                 body: JSON.stringify(data)
@@ -25,6 +28,10 @@ const Register = () => {
         }catch(err){
             console.log(err, "Try again")
         }
+    }
+
+    const navigateLoginPage = () =>{
+        navigate("/login")
     }
 
 
@@ -55,9 +62,9 @@ const Register = () => {
                     <button className="bg-sky-700 font-semibold cursor-pointer rounded-sm  mt-5 h-8 text-white" type="submit" onClick={registerPage}>Sign Up</button>
                 </form>
                 <div className="flex p-3 flex-row justify-start">
-                    <label className="text-sky-700 ">Already have an account?</label>
+                    <label className="text-sky-700 " onClick={navigateLoginPage}>Already have an account?</label>
                     <div className="ml-45"></div>
-                   <button className="text-sky-700 cursor-pointer">Log in</button>
+                   <button className="text-sky-700 cursor-pointer" onClick={navigateLoginPage}>Log in</button>
                 </div>
             </div>
         </div>

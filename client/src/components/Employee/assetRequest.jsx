@@ -1,7 +1,10 @@
 import React from "react";
+import Header from "../Header/header";
 
 const AssetRequest = () => {
   return (
+    <div>
+      <Header/>
     <div className="min-h-screen w-full bg-gray-50 flex justify-center">
       <form className="w-full max-w-xl text-left mt-8 sh">
         <h1 className="font-bold text-2xl">Asset Request</h1>
@@ -50,6 +53,8 @@ const AssetRequest = () => {
         </div>
       </form>
     </div>
+    </div>
+    
   );
 };
 
