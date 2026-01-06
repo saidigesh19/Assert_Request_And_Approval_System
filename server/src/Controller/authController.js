@@ -27,16 +27,16 @@ const signup = async (req, res) => {
 const login = async (req, res) => {
     try{
         const {email, password} = req.body
-        const username = await User.findOne(email) //Find the user in the database
-        if(!username){
+        const user = await User.findOne({email}) //Find the user in the database
+        if(!user){
             res.status(400).json({message: "User not Found"})
         }
-        const isMatch = await bcrypt.compare(password, loginUser.password) //Comparing Password using bcrypt
+        const isMatch = await bcrypt.compare(password, user.password) //Comparing Password using bcrypt
         if(!isMatch) res.status(400).json({message: "Invaild User Credentials"})
-        const token = jwt.sign({id:username._id, role:username.role}, process.env.JWT_SECRET, {expiresIn: "1d"}) // creating the jwt token
-        res.status(200).json({sucess:true, message: "User Loginned"})
+        const token = jwt.sign({id:user._id, role:user.role}, process.env.JWT_SECRET, {expiresIn: "1d"}) // creating the jwt token
+        res.status(200).json({sucess:true,token,username:{id:user._id,name:user.name,email:user.email,role:user.role}, message: "User Loginned"})
     }catch(err){
         res.send(400).json({message:"Something went wrong"}, err)
-    }
+    }   
 }
 module.exports = {signup, login}
