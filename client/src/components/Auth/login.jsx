@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import lockimage from '../../assets/lockimage.png'
+import {useNavigate} from 'react-router-dom'
 
 export default function LoginPage() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [msg, setMsg] = useState("");
+    const navigate = useNavigate();
+
     const handleLogin = async (e) =>{
         e.preventDefault();
 
@@ -13,7 +16,7 @@ export default function LoginPage() {
             method: "POST",
             header: {"Content-Type": "application/json"},
             body: JSON.stringify({
-                user_name:email,
+                email:email,
                 password
             })
         });
@@ -24,11 +27,15 @@ export default function LoginPage() {
             setMsg("Login Successful!");
             console.log("TOKEN ->", data.token);
             localStorage.setItem("token", data.token);
-            
+            navigate('/')
         }else{
             setMsg(data.message)
         }
     };
+
+    const NavigateSignup = () =>{
+        navigate("/register")
+    }
 
     return (
         <div className="flex justify-center items-center min-h-screen">
@@ -51,7 +58,7 @@ export default function LoginPage() {
 
                     {msg && <p className="text-center text-red-600 mt-2">{msg}</p>}
                     <div className=" flex w-98 my-3 justify-end">
-                        <button className="text-sky-600 ">Sign Up</button>
+                        <button className="text-sky-600 " onClick={NavigateSignup}>Sign Up</button>
                     </div>
                 </div>
             </div>
