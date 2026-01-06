@@ -3,6 +3,6 @@ const express = require('express')
 const router = express.Router()
 
 router.post('/empAssert', empAssert)
-router.post('/myRequest', myRequest)
+router.get('/myRequest', myRequest)
 
 module.exports = router;

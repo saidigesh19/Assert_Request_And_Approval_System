@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from 'axios';
 
 const AssetRequest = () => {
-  const[assetType,setAssetType]=useState("");
+  const[assert_name,setassert_name]=useState("");
   const[reason,setReason]=useState("");
   const[msg,setMsg]=useState("");
 
@@ -17,9 +17,9 @@ const AssetRequest = () => {
   
       try {
         const res = await axios.post(
-          "http://localhost:5000/api/employee/assetRequest",
+          "http://localhost:5000/api/empAssert",
           {
-            assetType,
+            assert_name,
             reason,
           },
           {
@@ -31,7 +31,7 @@ const AssetRequest = () => {
         );
   
         setMsg("Asset request submitted successfully");
-        setAssetType("");
+        setassert_name("");
         setReason("");
         console.log(res,"res")
       } catch (err) {
@@ -58,8 +58,8 @@ const AssetRequest = () => {
           <select
             id="assets"
             className="block w-full px-2.5 mt-3 py-2.5 border rounded-sm border-gray-300 text-sm"
-            value={assetType}
-            onChange={(e) => setAssetType(e.target.value)} required
+            value={assert_name}
+            onChange={(e) => setassert_name(e.target.value)} required
           >
             <option>Choose an asset</option>
             <option>Mouse</option>
