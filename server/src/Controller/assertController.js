@@ -20,7 +20,7 @@ const myRequest=async(req,res)=>{
             data:requests,
         });
     }catch(err){
-         res.status(401).json({status:false, message:"Something went worng"}, err)
+         res.status(401).json({status:false, message:err.message}, err)
     }
 }
 

@@ -1,20 +1,23 @@
 import { useState } from "react";
 import person from "../../assets/person.svg"
-import axios from "axios"
+// import axios from "axios"
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
-    const [data, setData] = useState({"name": "", "email": "", "role": "", "password": "", "confirmPassword": ""})
+    const [data, setData] = useState({"name":"", "email":"", "role":"", "password":"", "confirmpassword":""})
     const navigate = useNavigate();
     const handleChange = (e) => {
         const{name, value} = e.target;
         setData(prev => ({...prev, [name]:value}));
 
     }
+     const navigateLoginPage = () =>{
+        navigate("/login")
+    }
     const registerPage = async(e) => {
         e.preventDefault();
         try{
-            const response = await axios("http://localhost:5000/api/Signup",{
+            const response = await fetch("http://localhost:5000/api/signup",{
                 method: "POST",
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(data)
@@ -23,6 +26,8 @@ const Register = () => {
             if(response.ok){
                 alert("User Registered Succesfully");
                 setData({"name": "", "email": "", "role": "", "password": "", "confirmpassword": ""})
+                navigateLoginPage()
+                
             }else{
                 alert(`Error ${response.status}`)
             }
@@ -31,9 +36,7 @@ const Register = () => {
         }
     }
 
-    const navigateLoginPage = () =>{
-        navigate("/login")
-    }
+   
 
 
     return(
