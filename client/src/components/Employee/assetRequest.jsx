@@ -1,9 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from 'axios';
 
 const AssetRequest = () => {
+  const[assetType,setAssetType]=useState("");
+  const[reason,setReason]=useState("");
+  const[msg,setMsg]=useState("");
+
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+  
+      const token = localStorage.getItem("token");
+      if (!token) {
+        setMsg("Please login first");
+        return;
+      }
+  
+      try {
+        const res = await axios.post(
+          "http://localhost:5000/api/employee/assetRequest",
+          {
+            assetType,
+            reason,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+  
+        setMsg("Asset request submitted successfully");
+        setAssetType("");
+        setReason("");
+        console.log(res,"res")
+      } catch (err) {
+        console.error(err);
+        setMsg(err.response?.data?.message || "Failed to submit request");
+      }
+    };
+
   return (
     <div className="min-h-screen w-full flex justify-center">
-      <form className="w-full max-w-xl text-left mt-8 sh">
+      <form className="w-full max-w-xl text-left mt-8 sh" onSubmit={handleSubmit}>
         <h1 className="font-bold text-2xl text-left">Asset Request</h1>
 
         <div className="flex flex-col rounded border border-gray-300 p-4 mt-4 bg-white">
@@ -19,6 +58,8 @@ const AssetRequest = () => {
           <select
             id="assets"
             className="block w-full px-2.5 mt-3 py-2.5 border rounded-sm border-gray-300 text-sm"
+            value={assetType}
+            onChange={(e) => setAssetType(e.target.value)} required
           >
             <option>Choose an asset</option>
             <option>Mouse</option>
@@ -39,14 +80,20 @@ const AssetRequest = () => {
             rows="4"
             className="rounded-sm border border-gray-300 text-sm w-full p-3.5"
             placeholder="Write your reason here..."
+            value={reason}
+            onChange={(e) => setReason(e.target.value)}
+            required
           ></textarea>
 
           <button
-            type="button"
+            type="submit"
             className="w-full mt-4 bg-sky-700 text-white rounded-sm px-4 py-2.5 hover:bg-sky-800"
           >
             Submit
           </button>
+          {msg && (
+            <p className="mt-3 text-center text-sm text-red-600">{msg}</p>
+          )}
         </div>
       </form>
     </div>
