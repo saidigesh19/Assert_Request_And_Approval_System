@@ -1,20 +1,53 @@
 import { useState } from "react";
 import person from "../../assets/person.svg"
-import axios from "axios"
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
     const [data, setData] = useState({"name": "", "email": "", "role": "", "password": "", "confirmPassword": ""})
+    
     const navigate = useNavigate();
+    
     const handleChange = (e) => {
         const{name, value} = e.target;
         setData(prev => ({...prev, [name]:value}));
 
     }
+
+     const validate = () => {
+        const {name,email,role,password,confirmPassword} = data;
+        if(!name || !email || !role || !password || !confirmPassword){
+            alert("all field are required");
+            return false;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if(!emailRegex.test(email)){
+            alert("invalid email address");
+            return false;
+        }
+
+        if(password.length <= "6"){
+            alert("length of the password is less than 6");
+            return false;
+        }
+
+        if (confirmPassword !== password){
+            alert("mismatch of password and confirm password");
+            return false;
+        }
+        
+        return true;
+    };
+
+
     const registerPage = async(e) => {
         e.preventDefault();
+
+        if(!validate()) return;
+
         try{
-            const response = await axios("http://localhost:5000/api/Signup",{
+            const response = await fetch("http://localhost:5000/api/Signup",{
                 method: "POST",
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(data)
@@ -22,7 +55,8 @@ const Register = () => {
             console.log(data)
             if(response.ok){
                 alert("User Registered Succesfully");
-                setData({"name": "", "email": "", "role": "", "password": "", "confirmpassword": ""})
+                setData({"name": "", "email": "", "role": "", "password": "", "confirmPassword": ""})
+                navigate("/");
             }else{
                 alert(`Error ${response.status}`)
             }
@@ -30,11 +64,6 @@ const Register = () => {
             console.log(err, "Try again")
         }
     }
-
-    const navigateLoginPage = () =>{
-        navigate("/login")
-    }
-
 
     return(
         <div className="w-full font-sans-serif  flex justify-center">
@@ -59,13 +88,13 @@ const Register = () => {
                      <label className="flex font-semibold item-start my-1  text-black">Password</label>
                     <input className="border-1 rounded-sm h-9 bg-white  border-gray-300 p-2" name="password" type="password" onChange={handleChange} value={data.password} placeholder="Enter your password" required/>
                      <label className="flex font-semibold item-start my-1  text-black">Confirm Password</label>
-                     <input className="border-1 rounded-sm bg-white  border-gray-300 h-9 p-2" name="confirmpassword"type="password" onChange={handleChange} value={data.confirmpassword} placeholder="Confirm your password" required/>
+                     <input className="border-1 rounded-sm bg-white  border-gray-300 h-9 p-2" name="confirmPassword"type="password" onChange={handleChange} value={data.confirmPassword} placeholder="Confirm your password" required/>
                     <button className="bg-sky-700 font-semibold cursor-pointer rounded-sm  mt-5 h-8 text-white" type="submit" onClick={registerPage}>Sign Up</button>
                 </form>
                 <div className="flex p-3 flex-row justify-start">
-                    <label className="text-sky-700 " onClick={navigateLoginPage}>Already have an account?</label>
+                    <label className="text-sky-700 " onClick={()=> { navigate('/')}}>Already have an account?</label>
                     <div className="ml-45"></div>
-                   <button className="text-sky-700 cursor-pointer" onClick={navigateLoginPage}>Log in</button>
+                   <button className="text-sky-700 cursor-pointer" onClick={()=> { navigate('/')}}>Log in</button>
                 </div>
             </div>
         </div>
