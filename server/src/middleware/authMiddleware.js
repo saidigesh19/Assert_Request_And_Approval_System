@@ -15,10 +15,10 @@ const auth = async (req, res, next) => {
       return res.status(401).json({ success: false, message: "User not found" });
     }
     req.user = user;
-    next();
+    return next();
   } catch (err) {
     console.log(err);
-    res.status(500).json({ success: false, message: "Server error", error: err.message });
+    return res.status(500).json({ success: false, message: "Server error", error: err.message });
   }
 };
 
