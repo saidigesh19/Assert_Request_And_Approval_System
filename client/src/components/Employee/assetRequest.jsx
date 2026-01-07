@@ -6,6 +6,7 @@ const AssetRequest = () => {
   const[assert_name,setassert_name]=useState("");
   const[reason,setReason]=useState("");
   const[msg,setMsg]=useState("");
+  const [msgType, setMsgType] = useState("");
 
     const handleSubmit = async (e) => {
       e.preventDefault();
@@ -34,6 +35,7 @@ const AssetRequest = () => {
         setMsg("Asset request submitted successfully");
         setassert_name("");
         setReason("");
+        setMsgType("success");
         console.log(res,"res")
       } catch (err) {
         console.error(err);
@@ -65,7 +67,7 @@ const AssetRequest = () => {
             value={assert_name}
             onChange={(e) => setassert_name(e.target.value)} required
           >
-            <option>Choose an asset</option>
+            <option value="">Choose an asset</option>
             <option>Mouse</option>
             <option>Mobile</option>
             <option>Laptop</option>
@@ -96,8 +98,14 @@ const AssetRequest = () => {
             Submit
           </button>
           {msg && (
-            <p className="mt-3 text-center text-sm text-red-600">{msg}</p>
-          )}
+              <p
+                className={`mt-3 text-center text-sm ${
+                  msgType === "success" ? "text-green-600" : "text-red-600"
+                }`}
+              >
+                {msg}
+              </p>
+            )}
         </div>
       </form>
     </div>
