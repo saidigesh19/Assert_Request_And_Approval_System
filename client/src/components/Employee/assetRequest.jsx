@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import axios from 'axios';
+import Header from "../Header/header"
 
 const AssetRequest = () => {
-  const[assetType,setAssetType]=useState("");
+  const[assert_name,setassert_name]=useState("");
   const[reason,setReason]=useState("");
   const[msg,setMsg]=useState("");
 
@@ -17,9 +18,9 @@ const AssetRequest = () => {
   
       try {
         const res = await axios.post(
-          "http://localhost:5000/api/employee/assetRequest",
+          "http://localhost:5000/api/empAssert",
           {
-            assetType,
+            assert_name,
             reason,
           },
           {
@@ -31,7 +32,7 @@ const AssetRequest = () => {
         );
   
         setMsg("Asset request submitted successfully");
-        setAssetType("");
+        setassert_name("");
         setReason("");
         console.log(res,"res")
       } catch (err) {
@@ -41,7 +42,10 @@ const AssetRequest = () => {
     };
 
   return (
+    <div>
+      <Header/>
     <div className="min-h-screen w-full flex justify-center">
+      
       <form className="w-full max-w-xl text-left mt-8 sh" onSubmit={handleSubmit}>
         <h1 className="font-bold text-2xl text-left">Asset Request</h1>
 
@@ -58,8 +62,8 @@ const AssetRequest = () => {
           <select
             id="assets"
             className="block w-full px-2.5 mt-3 py-2.5 border rounded-sm border-gray-300 text-sm"
-            value={assetType}
-            onChange={(e) => setAssetType(e.target.value)} required
+            value={assert_name}
+            onChange={(e) => setassert_name(e.target.value)} required
           >
             <option>Choose an asset</option>
             <option>Mouse</option>
@@ -96,6 +100,7 @@ const AssetRequest = () => {
           )}
         </div>
       </form>
+    </div>
     </div>
     
   );

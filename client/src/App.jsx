@@ -7,14 +7,15 @@ import MyRequest from './components/Employee/myRequests';
 import AdminDashboard from './components/Admin/adminDashboard';
 function App() {
 
-return (
+  return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<LoginPage/>} />
-        <Route path="/register" element={<Register/>} />
-        <Route path="/assetrequest" element={<AssetRequest/>} />
-        <Route path="/myrequest" element={<MyRequest/>} />
-        <Route path="/dashboard" element={<AdminDashboard/>} />
+        
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/assetrequest" element={<AssetRequest />} />
+        <Route path="/myrequest" element={<MyRequest />} />
+        <Route path="/dashboard" element={<AdminDashboard />} />
       </Routes>
     </BrowserRouter>
   )

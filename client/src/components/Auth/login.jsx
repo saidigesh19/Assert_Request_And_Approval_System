@@ -14,7 +14,7 @@ export default function LoginPage() {
 
         const res = await fetch("http://localhost:5000/api/login", {
             method: "POST",
-            header: {"Content-Type": "application/json"},
+            headers: {"Content-Type": "application/json"},
             body: JSON.stringify({
                 email:email,
                 password
@@ -27,7 +27,8 @@ export default function LoginPage() {
             setMsg("Login Successful!");
             console.log("TOKEN ->", data.token);
             localStorage.setItem("token", data.token);
-            navigate('/')
+            localStorage.setItem("user", JSON.stringify(data.username.name))
+            navigate('/assetrequest')
         }else{
             setMsg(data.message)
         }
