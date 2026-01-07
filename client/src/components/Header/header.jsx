@@ -5,15 +5,10 @@ import { useNavigate, Link } from "react-router-dom";
 
 
 export default function Header() {
+    const username = localStorage.getItem("user")
     const [open, setOpen] = useState(false);
     const dropdownRef = useRef(null);
     const navigate = useNavigate();
-
-    
-    // const [user, setUser] = useState(null);
-    
-    const user = localStorage.getItem("user");
-    const parsedUser = user ? JSON.parse(user) : null;
 
     const handleLogout = () => {
         localStorage.removeItem("token");
@@ -48,7 +43,7 @@ export default function Header() {
                     className="ml-auto flex items-center gap-2 relative cursor-pointer"
                 >
                     <img src={User1} className="w-9 rounded-full" />
-                    <p className="text-white font-bold">{parsedUser.name || "User"}</p>
+                    <p className="text-white font-bold">{username}</p>
 
                     <img
                         src={downarrow}
@@ -62,7 +57,7 @@ export default function Header() {
                             <ul>
                                 <li
                                     onClick={handleLogout}
-                                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                                    className="px-4 py-2 hover:bg-gray-600 rounded cursor-pointer"
                                 >
                                     Logout
                                 </li>

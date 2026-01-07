@@ -41,7 +41,7 @@ const Register = () => {
 
 
      const navigateLoginPage = () =>{
-        navigate("/login")
+        navigate("/")
     }
     const registerPage = async(e) => {
         e.preventDefault();
@@ -77,8 +77,8 @@ const Register = () => {
                 <div className="Logo flex w-full justify-center">
                     <img className="w-20" src={person} alt="person-img" />
                 </div>
-                <div className="page-title">
-                    <h2 className="font-semibold text-xl text-black">Sign Up!</h2>
+                <div className=" flex justify-center">
+                    <h2 className="font-semibold  text-xl text-black">Sign Up!</h2>
                 </div>
                 <form className="flex p-5 flex-col">
                     <label className="flex font-semibold item-start my-1 text-black">Name</label>

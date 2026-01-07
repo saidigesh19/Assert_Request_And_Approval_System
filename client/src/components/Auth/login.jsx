@@ -6,11 +6,9 @@ export default function LoginPage() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [response, setResponse] = useState([])
     const [msg, setMsg] = useState("");
     const navigate = useNavigate();
-    const NavigateAssertRequest = () => {
-        navigate("/assetrequest")
-    }
     const handleLogin = async (e) =>{
         e.preventDefault();
 
@@ -28,9 +26,15 @@ export default function LoginPage() {
         if(res.ok){
             setMsg("Login Successful!");
             console.log("TOKEN ->", data.token);
+            console.log("res", data.user)
+            setResponse(res.user)
             localStorage.setItem("token", data.token);
-            localStorage.setItem("user", JSON.stringify(data.username.name))
-            navigate('/assetrequest')
+            localStorage.setItem("user", JSON.stringify(data.user.name))
+              if (data.user.role === "Admin"){
+                navigate("/dashboard")
+            }else if (data.user.role === "Employee"){
+                navigate('/assetrequest')
+            }
         }else{
             setMsg(data.message)
         }
@@ -39,6 +43,7 @@ export default function LoginPage() {
     const NavigateSignup = () =>{
         navigate("/register")
     }
+  
     
 
     return (
