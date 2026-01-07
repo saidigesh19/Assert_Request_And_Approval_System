@@ -29,7 +29,8 @@ export default function LoginPage() {
             setMsg("Login Successful!");
             console.log("TOKEN ->", data.token);
             localStorage.setItem("token", data.token);
-            NavigateAssertRequest()
+            localStorage.setItem("user", JSON.stringify(data.username.name))
+            navigate('/assetrequest')
         }else{
             setMsg(data.message)
         }
