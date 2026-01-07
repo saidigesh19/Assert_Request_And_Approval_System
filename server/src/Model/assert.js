@@ -6,8 +6,9 @@ const assertSchema = new mongoose.Schema({
     status:{type:String, enum:['Pending', 'Approved', 'Rejected'], default:'Pending', required:true},
     employee: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "userSchema",
+      ref: "User",
+      required: true
     },
 },{timestamps:true})
 
-module.exports = mongoose.model("assertSchema", assertSchema)
+module.exports = mongoose.model("AssetRequest", assertSchema)
