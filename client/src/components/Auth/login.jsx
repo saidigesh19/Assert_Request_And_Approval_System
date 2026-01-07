@@ -8,7 +8,9 @@ export default function LoginPage() {
     const [password, setPassword] = useState("");
     const [msg, setMsg] = useState("");
     const navigate = useNavigate();
-
+    const NavigateAssertRequest = () => {
+        navigate("/assetrequest")
+    }
     const handleLogin = async (e) =>{
         e.preventDefault();
 
@@ -37,6 +39,7 @@ export default function LoginPage() {
     const NavigateSignup = () =>{
         navigate("/register")
     }
+    
 
     return (
         <div className="flex justify-center items-center min-h-screen">
