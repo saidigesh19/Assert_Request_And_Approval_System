@@ -6,4 +6,4 @@ const router = express.Router()
 router.post('/empAssert',auth, empAssert)
 router.get('/myRequest',auth, myRequest)
 
-module.exports = router;
+module.exports = router;    
