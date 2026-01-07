@@ -9,12 +9,6 @@ export default function LoginPage() {
     const [response, setResponse] = useState([])
     const [msg, setMsg] = useState("");
     const navigate = useNavigate();
-    const NavigateAssertRequest = () => {
-        navigate("/assetrequest")
-    }
-    const NavigateAdmin = () => {
-        navigate("/dashboard")
-    }
     const handleLogin = async (e) =>{
         e.preventDefault();
 
@@ -35,8 +29,8 @@ export default function LoginPage() {
             console.log("res", data.user)
             setResponse(res.user)
             localStorage.setItem("token", data.token);
-            localStorage.setItem("user", data.user.name);
-            if (data.user.role === "Admin"){
+            localStorage.setItem("user", JSON.stringify(data.user.name))
+              if (data.user.role === "Admin"){
                 navigate("/dashboard")
             }else if (data.user.role === "Employee"){
                 navigate('/assetrequest')
