@@ -12,7 +12,7 @@ const Register = () => {
 
     }
      const navigateLoginPage = () =>{
-        navigate("/login")
+        navigate("/")
     }
     const registerPage = async(e) => {
         e.preventDefault();

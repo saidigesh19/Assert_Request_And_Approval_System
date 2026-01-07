@@ -34,7 +34,7 @@ const login = async (req, res) => {
         const isMatch = await bcrypt.compare(password, user.password) //Comparing Password using bcrypt
         if(!isMatch) res.status(400).json({message: "Invaild User Credentials"})
         const token = jwt.sign({id:user._id, role:user.role}, process.env.JWT_SECRET, {expiresIn: "1d"}) // creating the jwt token
-        res.status(200).json({sucess:true,token,username:{id:user._id,name:user.name,email:user.email,role:user.role}, message: "User Loginned"})
+        res.status(200).json({sucess:true,token,user:{id:user._id,name:user.name,email:user.email,role:user.role}, message: "User Loginned"})
     }catch(err){
         res.send(400).json({message:"Something went wrong"}, err)
     }   

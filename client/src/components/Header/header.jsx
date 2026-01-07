@@ -3,6 +3,8 @@ import User from "../../assets/user.png";
 import downarrow from "../../assets/down-arrow.png"
 
 export default function Header() {
+    const username = localStorage.getItem("user")
+    console.log(username)
     return (
         <nav className="bg-blue-500">
             <div className="h-13 flex items-center px-5 justify-between">
@@ -16,7 +18,7 @@ export default function Header() {
                 {/* Right section */}
                 <div className="ml-auto flex items-center gap-2">
                     <img src={User} alt="profile" className="w-9 rounded-full"/>
-                    <p className="text-white font-bold">Plam</p>
+                    <p className="text-white font-bold"  ></p>
                     <img src={downarrow} alt="" className="w-4"/>
                 </div>
             </div>
