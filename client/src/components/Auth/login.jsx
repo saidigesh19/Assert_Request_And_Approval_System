@@ -6,7 +6,7 @@ export default function LoginPage() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [response, setResponse] = useState([])
+    // const [response, setResponse] = useState([])
     const [msg, setMsg] = useState("");
     const navigate = useNavigate();
     const handleLogin = async (e) =>{
@@ -17,7 +17,7 @@ export default function LoginPage() {
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({
                 email:email,
-                password
+                password    
             })
         });
 
@@ -26,10 +26,10 @@ export default function LoginPage() {
         if(res.ok){
             setMsg("Login Successful!");
             console.log("TOKEN ->", data.token);
-            console.log("res", data.user)
-            setResponse(res.user)
+            console.log("res", data.user);
+            // setResponse(res.user)
             localStorage.setItem("token", data.token);
-            localStorage.setItem("user", JSON.stringify(data.user.name))
+            localStorage.setItem("user", JSON.stringify(data.user))
               if (data.user.role === "Admin"){
                 navigate("/dashboard")
             }else if (data.user.role === "Employee"){
