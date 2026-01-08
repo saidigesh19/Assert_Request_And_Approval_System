@@ -2,6 +2,7 @@ import { FaSearch } from "react-icons/fa";
 import avatar from "../../assets/requestedAvatar.png";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Header from "../Header/header.jsx";
 
 const AdminDashboard = () => {
   const [requests, setRequests] = useState([]);
@@ -29,6 +30,7 @@ const AdminDashboard = () => {
 
   return (
     <div className="mx-auto w-full h-screen">
+      <Header/>
       <form className="w-3xl mx-auto flex flex-col mt-8">
         <h1 className="font-bold text-2xl text-left">Admin - Dashboard</h1>
         <div className="border text-left bg-white border-gray-300 rounded mt-5">
