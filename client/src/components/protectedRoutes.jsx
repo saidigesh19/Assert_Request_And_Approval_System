@@ -22,7 +22,6 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
       </div>
     );
   }
-
   if (!allowedRoles.includes(user.role)) {
     return (
       <div className="flex flex-col justify-center items-center min-h-screen gap-4">
@@ -38,7 +37,6 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
       </div>
     );
   }
-
   return children;
 };
 

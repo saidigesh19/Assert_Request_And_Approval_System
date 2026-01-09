@@ -12,8 +12,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LoginPage/>} />
-        <Route path="/register" element={<Register/>} />
-        
+        <Route path="/register" element={<Register/>} />   
          {/* employee Routes */}
         <Route path="/assetrequest" element={
           <ProtectedRoute allowedRoles={["Employee"]}>
@@ -25,7 +24,6 @@ function App() {
           <MyRequest/>
           </ProtectedRoute>
           } />
-
           {/* admin routes */}
         <Route path="/dashboard" element={
           <ProtectedRoute allowedRoles={["Admin"]}>
