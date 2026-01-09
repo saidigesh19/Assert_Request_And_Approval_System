@@ -38,6 +38,7 @@ export default function LoginPage() {
     const NavigateSignup = () =>{
         navigate("/register")
     }
+
     return (
         <div className="flex justify-center items-center min-h-screen">
             <div className="flex flex-col items-center gap-15 bg-gray-50 justify-center w-120 h-150">
@@ -49,9 +50,9 @@ export default function LoginPage() {
                     <form onSubmit={handleLogin}>
                         <div className="mx-auto px-4 flex flex-col self-start justify-center gap-2 ">
                             <label htmlFor="emailId" className="self-start font-bold">Email</label>
-                            <input type="text" name="email" placeholder="Enter your email" className="border p-2" value={email} onChange={(e)=> setEmail(e.target.value)}/>
+                            <input type="text" name="email" placeholder="Enter your email" className="border p-2" value={email} onChange={(e)=> setEmail(e.target.value)} required/>
                             <label htmlFor="password" className="self-start font-bold" >Password</label>
-                            <input type="password" name="password" placeholder="Enter your password" className="border p-2" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                            <input type="password" name="password" placeholder="Enter your password" className="border p-2" value={password} onChange={(e) => setPassword(e.target.value)} required/>
                             <button className=" w-96 p-2 bg-sky-500 hover:bg-sky-700 font-bold mt-3 text-white">Log In</button>
                         </div>
                     </form>
