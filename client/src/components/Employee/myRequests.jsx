@@ -20,7 +20,6 @@ const MyRequest = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-
       // stores the response body in data
       setRequests(res.data.data);
       setLoading(false);
@@ -51,7 +50,6 @@ const MyRequest = () => {
       <Header />
       <div className="w-3xl mx-auto flex flex-col mt-8">
         <h1 className="font-bold text-2xl text-left">My Requests</h1>
-
         <div className="border text-left bg-white border-gray-300 rounded mt-5">
           <div className="m-2 flex flex-row justify-between gap-20 border border-gray-50 rounded text-left bg-gray-100">
             <div className="w-full h-12 p-3 items-center border rounded-sm border-gray-200 text-sm bg-white">
@@ -76,7 +74,6 @@ const MyRequest = () => {
               <FaSearch className="absolute m-4 text-gray-500" />
             </div>
           </div>
-
           <div className="relative overflow-x-auto shadow-xs rounded-base">
             {loading && (
               <div className="p-6 text-center text-gray-600 font-medium">
@@ -146,5 +143,4 @@ const MyRequest = () => {
     </div>
   );
 };
-
 export default MyRequest;

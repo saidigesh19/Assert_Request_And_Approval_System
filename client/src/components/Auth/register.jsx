@@ -5,48 +5,37 @@ import { useNavigate } from "react-router-dom";
 const Register = () => {
     const [data, setData] = useState({"name":"", "email":"", "role":"", "password":"", "confirmpassword":""})
     const navigate = useNavigate();
-    
     const handleChange = (e) => {
         const{name, value} = e.target;
         setData(prev => ({...prev, [name]:value}));
     }
-
      const validate = () => {
         const {name,email,role,password,confirmpassword} = data;
         if(!name || !email || !role || !password || !confirmpassword){
             alert("all field are required");
             return false;
         }
-
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
         if(!emailRegex.test(email)){
             alert("invalid email address");
             return false;
         }
-
         if(password.length <= "6"){
             alert("length of the password is less than 6");
             return false;
         }
-
         if (confirmpassword !== password){
-            alert("mismatch of password and confirm password");
+            alert("Password and Confirm Password should be same");
             return false;
-        }
-        
+        } 
         return true;
     };
-
-
      const navigateLoginPage = () =>{
         navigate("/")
     }
     const registerPage = async(e) => {
         e.preventDefault();
-
         if(!validate()) return;
-
         try{
             const response = await fetch("http://localhost:5000/api/signup",{
                 method: "POST",
@@ -66,7 +55,6 @@ const Register = () => {
             console.log(err, "Try again")
         }
     }
-
     return(
         <div className="w-full font-sans-serif  flex justify-center">
             <div className="container justify-center shadow-md rounded-sm bg-gray-50 h-150 mt-15 item-center w-120 p-3">
