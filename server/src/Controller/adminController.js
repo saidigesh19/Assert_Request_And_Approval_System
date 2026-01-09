@@ -11,6 +11,7 @@ const getAllRequests = async (req, res) => {
       data: requests
     });
   } catch (err) {
+    console.log(err,"err");
     res.status(500).json({
       success: false,
       message: "Failed to fetch requests",
