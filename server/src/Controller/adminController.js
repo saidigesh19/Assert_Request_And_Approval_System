@@ -23,7 +23,7 @@ const approveRequest=async(req,res)=>{
     try{
         const {id}=req.params;
         const request=await AssetRequest.findByIdAndUpdate(
-            id,{status:"Approved",approvedBy:req.user._id},{new:true}
+            id,{status:"approved",approvedBy:req.user._id},{new:true}
         );
         if(!request) return res.status(404).json({success:false,message:"Request not found"});
         res.status(200).json({success:true,data:request});
@@ -36,12 +36,12 @@ const rejectRequest=async(req,res)=>{
     try{
         const {id}=req.params;
         const request=await AssetRequest.findByIdAndUpdate(
-            id,{status:"Rejected",approvedBy:req.user._id},{new:true}
+            id,{status:"rejected",approvedBy:req.user._id},{new:true}
         );
         if(!request) return res.status(404).json({success:false,message:"Request not found"});
         res.status(200).json({success:true,data:request});
     }catch(err){
-        res.status(500).json({success:false,message:"Failed to approve request", error: err.message})
+        res.status(500).json({success:false,message:"Failed to reject request", error: err.message})
     }
 }
 

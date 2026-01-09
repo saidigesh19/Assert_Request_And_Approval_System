@@ -9,7 +9,6 @@ const Register = () => {
     const handleChange = (e) => {
         const{name, value} = e.target;
         setData(prev => ({...prev, [name]:value}));
-
     }
 
      const validate = () => {
@@ -68,12 +67,9 @@ const Register = () => {
         }
     }
 
-   
-
-
     return(
         <div className="w-full font-sans-serif  flex justify-center">
-            <div className="container justify-center shadow-md rounded-sm bg-gray-50 h-150 item-center w-120 p-3">
+            <div className="container justify-center shadow-md rounded-sm bg-gray-50 h-150 mt-15 item-center w-120 p-3">
                 <div className="Logo flex w-full justify-center">
                     <img className="w-20" src={person} alt="person-img" />
                 </div>
