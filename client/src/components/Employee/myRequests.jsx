@@ -7,6 +7,7 @@ const MyRequest = () => {
   const [requests, setRequests] = useState([]); // Stores the data in the state
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [statusFilter, setStatusFilter] = useState("all");
 
   const fetchRequests = async () => {
     try {
@@ -35,8 +36,15 @@ const MyRequest = () => {
   };
   // Fetch data automatically when the component loads
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchRequests();
   }, []);
+
+  const filteredRequests = requests.filter((item) => {
+    if (statusFilter === "all") return true;
+    return item.status.toLowerCase() === statusFilter;
+  });
+
   return (
     <div className="mx-auto w-full h-screen">
       <Header />
@@ -46,11 +54,15 @@ const MyRequest = () => {
           <div className="m-2 flex flex-row justify-between gap-20 border border-gray-50 rounded text-left bg-gray-100">
             <div className="w-full h-12 p-3 items-center border rounded-sm border-gray-200 text-sm bg-white">
               <label>Status :</label>
-              <select className="ml-2">
-                <option>All</option>
-                <option>Pending</option>
-                <option>Approved</option>
-                <option>Rejected</option>
+              <select
+                value={statusFilter}
+                onChange={(e) => setStatusFilter(e.target.value)}
+                className="ml-2 px-2 py-1"
+              >
+                <option value="all">All</option>
+                <option value="pending">Pending</option>
+                <option value="approved">Approved</option>
+                <option value="rejected">Rejected</option>
               </select>
             </div>
             <div className="relative w-full max-w-sm flex justify-end">
@@ -63,50 +75,68 @@ const MyRequest = () => {
             </div>
           </div>
           <div className="relative overflow-x-auto shadow-xs rounded-base">
-            <table className="w-full text-sm text-left rtl:text-right text-body">
-              <thead className="text-sm bg-gray-100 border-t border-b border-gray-200">
-                <tr>
-                  <th scope="col" className="px-6 py-3 font-medium">
-                    Asset type
-                  </th>
-                  <th scope="col" className="px-6 py-3 font-medium">
-                    Reason
-                  </th>
-                  <th scope="col" className="px-6 py-3 font-medium">
-                    Status
-                  </th>
-                  <th scope="col" className="px-6 py-3 font-medium">
-                    Requested On
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {requests.map((item, index) => {
-                  const statusColor =
-                    statusStyles[item.status?.toLowerCase()] ||
-                    "bg-gray-200 text-gray-700";
-                  return (
-                    <tr
-                      key={index}
-                      className="bg-neutral-primary border-b border-gray-200"
-                    >
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        {item.assert_name}
-                      </td>
-                      <td className="px-6 py-4">{item.reason}</td>
-                      <td className="px-6 py-4">
-                        <button
-                          className={`border px-2 py-1 rounded text-xs ${statusColor}`}
-                        >
-                          {item.status}
-                        </button>
-                      </td>
-                      <td className="px-6 py-4">{item.createdAt}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+            {loading && (
+              <div className="p-6 text-center text-gray-600 font-medium">
+                Loading requests...
+              </div>
+            )}
+
+            {error && !loading && (
+              <div className="p-4 text-center text-red-600 font-medium">
+                {error}
+              </div>
+            )}
+
+            {!loading && !error && (
+              <table className="w-full text-sm text-left rtl:text-right text-body">
+                <thead className="text-sm bg-gray-100 border-t border-b border-gray-200">
+                  <tr>
+                    <th scope="col" className="px-6 py-3 font-medium">
+                      Asset type
+                    </th>
+                    <th scope="col" className="px-6 py-3 font-medium">
+                      Reason
+                    </th>
+                    <th scope="col" className="px-6 py-3 font-medium">
+                      Status
+                    </th>
+                    <th scope="col" className="px-6 py-3 font-medium">
+                      Requested On
+                    </th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {filteredRequests.map((item, index) => {
+                    const statusColor =
+                      statusStyles[item.status?.toLowerCase()] ||
+                      "bg-gray-200 text-gray-700";
+
+                    return (
+                      <tr
+                        key={index}
+                        className="bg-neutral-primary border-b border-gray-200"
+                      >
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          {item.assert_name}
+                        </td>
+                        <td className="px-6 py-4">{item.reason}</td>
+                        <td className="px-6 py-4">
+                          <button
+                            className={`border px-2 py-1 rounded text-xs ${statusColor}`}
+                          >
+                            {item.status}
+                          </button>
+                        </td>
+                        <td className="px-6 py-4">
+                          {new Date(item.createdAt).toLocaleDateString()}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            )}
           </div>
         </div>
       </div>
