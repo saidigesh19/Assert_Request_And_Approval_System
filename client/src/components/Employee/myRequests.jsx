@@ -36,6 +36,7 @@ const MyRequest = () => {
   };
   // Fetch data automatically when the component loads
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchRequests();
   }, []);
 
@@ -67,6 +68,20 @@ const MyRequest = () => {
           </div>
 
           <div className="relative overflow-x-auto shadow-xs rounded-base">
+              {loading && (
+    <div className="p-6 text-center text-gray-600 font-medium">
+      Loading requests...
+    </div>
+  )}
+
+  {error && !loading && (
+    <div className="p-4 text-center text-red-600 font-medium">
+      {error}
+    </div>
+  )}
+
+  {!loading && !error && (
+
             <table className="w-full text-sm text-left rtl:text-right text-body">
               <thead className="text-sm bg-gray-100 border-t border-b border-gray-200">
                 <tr>
@@ -114,6 +129,7 @@ const MyRequest = () => {
                 })}
               </tbody>
             </table>
+  )}
           </div>
         </div>
       </div>

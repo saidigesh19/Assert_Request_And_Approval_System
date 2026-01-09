@@ -6,6 +6,7 @@ import Header from "../Header/header.jsx";
 
 const AdminDashboard = () => {
   const [requests, setRequests] = useState([]);
+  const [openActionId, setOpenActionId] = useState(null);
 
   const token = localStorage.getItem("token");
   const fetchData = async () => {
@@ -27,6 +28,40 @@ const AdminDashboard = () => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchData();
   }, []);
+
+  const updateStatus = async (id, status) => {
+    try {
+      await axios.put(
+        `http://localhost:5000/api/asset-requests/${id}/approve`,
+        { status },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      setRequests((prev) =>
+        prev.map((req) =>
+          req._id === id ? { ...req, status: status.toUpperCase() } : req
+        )
+      );
+
+      setOpenActionId(null);
+    } catch (err) {
+      console.error("Status update failed", err);
+    }
+  };
+
+  const getStatusColor = (status) => {
+    switch (status.toLowerCase()) {
+      case "approved":
+        return "bg-green-600 text-white";
+      case "rejected":
+        return "bg-red-600 text-white";
+      case "pending":
+        return "bg-yellow-600 text-white";
+      default:
+        return "bg-gray-300";
+    }
+  };
+
 
   return (
     <div className="mx-auto w-full h-screen">
@@ -84,6 +119,7 @@ const AdminDashboard = () => {
                   } else if (item.status.toLowerCase() === "rejected") {
                     statusColor = "bg-red-600 text-white";
                   } else if (item.status.toLowerCase() === "pending") {
+                    // eslint-disable-next-line no-unused-vars
                     statusColor = "bg-yellow-600 text-white";
                   }
                   return (           
@@ -109,14 +145,57 @@ const AdminDashboard = () => {
                         </div>  
                       </td>
 
-                      <td className="px-6 py-4">{item.createdAt}</td>
-                      <td className="px-6 py-4">
-                        <button
-                          className={`border px-2 py-1 rounded ${statusColor}`}
+                      <td className="px-6 py-4">{new Date(item.createdAt).toLocaleDateString()}</td>
+                      <td className="px-6 py-4 relative">
+                      {item.status.toLowerCase() === "pending" ? (
+                        <>
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setOpenActionId(
+                                openActionId === item._id ? null : item._id
+                              )
+                            }
+                            className="px-3 py-1 rounded bg-yellow-600 text-white"
+                          >
+                            Pending
+                          </button>
+
+                          {openActionId === item._id && (
+                            <div className="absolute mt-2 w-20 bg-white border rounded shadow z-10">
+                              <button
+                                type="button"
+                                onClick={() =>
+                                  updateStatus(item._id, "approved")
+                                }
+                                className="block w-full px-3 py-2 text-left hover:bg-green-100 text-green-700"
+                              >
+                                Approve
+                              </button>
+
+                              <button
+                                type="button"
+                                onClick={() =>
+                                  updateStatus(item._id, "rejected")
+                                }
+                                className="block w-full px-3 py-2 text-left hover:bg-red-100 text-red-700"
+                              >
+                                Reject
+                              </button>
+                            </div>
+                          )}
+                        </>
+                      ) : (
+                        <span
+                          className={`px-3 py-1 rounded ${getStatusColor(
+                            item.status
+                          )}`}
                         >
                           {item.status}
-                        </button>
-                      </td>
+                        </span>
+                      )}
+                    </td>
+
                     </tr>
                   );
                 })}

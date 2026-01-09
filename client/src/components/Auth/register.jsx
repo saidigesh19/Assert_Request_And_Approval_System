@@ -98,9 +98,9 @@ const Register = () => {
                     <button className="bg-sky-700 font-semibold cursor-pointer rounded-sm  mt-5 h-8 text-white" type="submit" onClick={registerPage}>Sign Up</button>
                 </form>
                 <div className="flex p-3 flex-row justify-start">
-                    <label className="text-sky-700 " onClick={()=> { navigate('/login')}}>Already have an account?</label>
+                    <label className="text-sky-700 " onClick={()=> { navigate('/')}}>Already have an account?</label>
                     <div className="ml-45"></div>
-                   <button className="text-sky-700 cursor-pointer" onClick={()=> { navigate('/login')}}>Log in</button>
+                   <button className="text-sky-700 cursor-pointer" onClick={()=> { navigate('/')}}>Log in</button>
                 </div>
             </div>
         </div>
