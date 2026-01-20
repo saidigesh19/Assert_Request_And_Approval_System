@@ -7,7 +7,7 @@ const empAssert = async (req, res)=>{
             assert_name: assert_name, 
             reason:reason, 
             employee: req.user._id,
-            status: "pending"});
+            status: "Pending"});
         return res.status(201).json({status:true, message:"Assert request is submitted", assertrequest})
     }catch(err){
         return res.status(500).json({status:false, message:err.message}, err)

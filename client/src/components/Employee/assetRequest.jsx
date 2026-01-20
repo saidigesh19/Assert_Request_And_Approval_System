@@ -10,13 +10,11 @@ const AssetRequest = () => {
 
     const handleSubmit = async (e) => {
       e.preventDefault();
-  
       const token = localStorage.getItem("token");
       if (!token) {
         setMsg("Please login first");
         return;
       }
-  
       try {
         const res = await axios.post(
           "http://localhost:5000/api/empAssert",
@@ -30,8 +28,7 @@ const AssetRequest = () => {
               Authorization: `Bearer ${token}`,
             },
           }
-        );
-  
+        ); 
         setMsg("Asset request submitted successfully");
         setassert_name("");
         setReason("");
@@ -42,25 +39,20 @@ const AssetRequest = () => {
         setMsg(err.response?.data?.message || "Failed to submit request");
       }
     };
-
   return (
     <div>
       <Header/>
-    <div className="min-h-screen w-full flex justify-center">
-      
+    <div className="min-h-screen w-full flex justify-center">  
       <form className="w-full max-w-xl text-left mt-8 sh" onSubmit={handleSubmit}>
         <h1 className="font-bold text-2xl text-left">Asset Request</h1>
-
         <div className="flex flex-col rounded border border-gray-300 p-4 mt-4 bg-white">
           <h2 className="font-medium text-xl ">Request New Asset</h2>
-
           <label
             htmlFor="assets"
             className="block mt-2.5 font-medium"
           >
             Asset Type
           </label>
-
           <select
             id="assets"
             className="block w-full px-2.5 mt-3 py-2.5 border rounded-sm border-gray-300 text-sm"
@@ -73,14 +65,12 @@ const AssetRequest = () => {
             <option>Laptop</option>
             <option>Keyboard</option>
           </select>
-
           <label
             htmlFor="message"
             className="block mt-4 mb-2.5 font-medium"
           >
             Reason
           </label>
-
           <textarea
             id="message"
             rows="4"
@@ -90,7 +80,6 @@ const AssetRequest = () => {
             onChange={(e) => setReason(e.target.value)}
             required
           ></textarea>
-
           <button
             type="submit"
             className="w-full mt-4 bg-sky-700 text-white rounded-sm px-4 py-2.5 hover:bg-sky-800"
@@ -109,9 +98,7 @@ const AssetRequest = () => {
         </div>
       </form>
     </div>
-    </div>
-    
+    </div> 
   );
 };
-
 export default AssetRequest;

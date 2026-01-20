@@ -12,7 +12,7 @@ const AdminDashboard = () => {
   const token = localStorage.getItem("token");
   const fetchData = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/asset-requests", {
+      const res = await axios.get("http://localhost:5000/api/assetrequests", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -34,8 +34,8 @@ const updateStatus = async (id, status) => {
   try {
     const url =
       status === "approved"
-        ? `http://localhost:5000/api/asset-requests/${id}/approve`
-        : `http://localhost:5000/api/asset-requests/${id}/reject`;
+        ? `http://localhost:5000/api/assetrequests/${id}/approve`
+        : `http://localhost:5000/api/assetrequests/${id}/reject`;
 
     await axios.put(url, {}, {
       headers: { Authorization: `Bearer ${token}` },
